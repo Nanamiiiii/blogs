@@ -1,12 +1,11 @@
 ---
 title: Multipass on Windows with VirtualBox
 description: MultipassをVirtualBoxバックエンドで使うときのメモ on Windows
-cover: profile_icon.png
 tags:
   - Windows
   - VM
 created: 2024-10-19T18:06:26+09:00
-updated: 2025-01-04T17:42:06+09:00
+updated: 2025-01-05T00:41:05+09:00
 permalink: multipass-windows
 publish: true
 ---

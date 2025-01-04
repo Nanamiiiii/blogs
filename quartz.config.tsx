@@ -77,7 +77,7 @@ const ogpImageStructure: SocialImageOptions["imageStructure"] = (
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "Myuu's Trashcan",
-    pageTitleSuffix: " - Myuu's 🗑️",
+    pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
@@ -95,7 +95,7 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "M PLUS 1p",
+        header: "Noto Sans JP",
         body: "Noto Sans JP",
         code: "IBM Plex Mono",
       },

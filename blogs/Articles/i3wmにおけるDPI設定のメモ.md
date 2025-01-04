@@ -1,11 +1,10 @@
 ---
 tags:
   - Linux
-cover: profile_icon.png
 title: i3wmにおけるDPI設定のメモ
 description: i3wmで4Kなどの高解像度ディスプレイをつかう際，DPIや諸々のサイズ設定における変更点
 created: 2024-10-19T01:45
-updated: 2025-01-04T17:42:22+09:00
+updated: 2025-01-05T00:40:56+09:00
 permalink: i3wm-dpi
 publish: true
 ---

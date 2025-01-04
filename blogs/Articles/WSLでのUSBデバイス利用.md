@@ -1,12 +1,11 @@
 ---
 title: WSLでのUSBデバイス利用
 description: WSLでUSBを利用するためのusbipdの使用方法について
-cover: profile_icon.png
 tags:
   - Windows
   - WSL
 created: 2024-10-19T17:46:26+09:00
-updated: 2025-01-04T17:40:57+09:00
+updated: 2025-01-05T00:41:36+09:00
 permalink: wsl-usb
 publish: true
 ---

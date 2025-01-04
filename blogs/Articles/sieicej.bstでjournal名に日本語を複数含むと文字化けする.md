@@ -1,11 +1,10 @@
 ---
 title: sieicej.bstでjournal名に日本語を複数含むと文字化けする
 description: 電子情報通信学会のTeXテンプレにある文献スタイルsieicej.bstで文字化けする問題
-cover: profile_icon.png
 tags:
   - Scrap
 created: 2024-10-19T18:03:33+09:00
-updated: 2025-01-04T17:41:32+09:00
+updated: 2025-01-05T00:41:23+09:00
 permalink: sieicej-bug-00
 publish: true
 ---

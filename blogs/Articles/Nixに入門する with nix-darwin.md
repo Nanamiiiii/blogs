@@ -5,13 +5,12 @@ aliases:
 tags:
   - Nix
   - macOS
-cover: profile_icon.png
 created: 2024-11-25T23:35:35+09:00
 description: 1週間ほどでnix-darwinからNixに入門したお話
 permalink: beHVRLPEdQ9tfCoZ
 publish: false
 title: Nixへ入門する with nix-darwin
-updated: 2025-01-04T17:41:56+09:00
+updated: 2025-01-05T00:41:11+09:00
 ---
 
 1ヶ月ほど前に数年使用してきた[dotfiles](https://github.com/Nanamiiiii/dotfiles)のNix化をはじめた．

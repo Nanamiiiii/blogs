@@ -1,12 +1,11 @@
 ---
 title: pacmanの設定
 description: Archのパッケージマネージャ pacmanの設定
-cover: profile_icon.png
 tags:
   - Linux
   - Arch
 created: 2024-10-19T18:01:49+09:00
-updated: 2025-01-04T17:41:48+09:00
+updated: 2025-01-05T00:41:14+09:00
 permalink: pacman-pkg
 publish: true
 ---

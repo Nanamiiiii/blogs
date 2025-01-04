@@ -1,12 +1,11 @@
 ---
 title: WSLからUSBストレージデバイスを使う
 description: WSLでUSBデバイスを直接扱う方法
-cover: profile_icon.png
 tags:
   - WSL
   - Windows
 created: 2024-10-19T18:07:41+09:00
-updated: 2025-01-04T17:41:03+09:00
+updated: 2025-01-05T00:41:34+09:00
 permalink: wsl-usb-storage
 publish: true
 ---

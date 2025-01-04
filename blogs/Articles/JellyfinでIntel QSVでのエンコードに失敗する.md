@@ -1,11 +1,10 @@
 ---
 tags:
   - Linux
-cover: profile_icon.png
 description: JellyfinのHardware Transcodeにて，QSVによるエンコードを有効にするとTranscodeを必要とする条件で再生に失敗する際の対処
 title: JellyfinでIntel QSVでのエンコードに失敗するときの対処
 created: 2024-10-19T01:25
-updated: 2025-01-04T17:42:17+09:00
+updated: 2025-01-05T00:40:59+09:00
 permalink: jellyfin-qsv
 publish: true
 ---

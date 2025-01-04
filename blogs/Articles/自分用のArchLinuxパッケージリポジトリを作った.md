@@ -1,12 +1,11 @@
 ---
 title: 自分用のArchLinuxパッケージリポジトリを作った
 description: 自分用にArchLinuxのパッケージリポジトリを作った話
-cover: profile_icon.png
 tags:
   - Arch
   - Linux
 created: 2024-10-19T17:55:56+09:00
-updated: 2025-01-04T17:40:18+09:00
+updated: 2025-01-05T00:41:42+09:00
 permalink: archpkg-repo
 publish: true
 ---

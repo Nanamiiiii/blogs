@@ -1,11 +1,10 @@
 ---
 title: Review of 2024
 description: 2024年も色々ありました
-cover: profile_icon.png
 tags:
   - TrashCan
 created: 2024-12-31T20:25:43+09:00
-updated: 2025-01-04T17:41:38+09:00
+updated: 2025-01-05T00:41:20+09:00
 permalink: p0rCZAjhz3bXmVB3
 publish: true
 ---

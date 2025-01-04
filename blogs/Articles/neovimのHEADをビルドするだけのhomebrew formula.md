@@ -1,11 +1,10 @@
 ---
 title: neovimのHEADをビルドするだけのhomebrew formula
 description: タイトルの通り
-cover: profile_icon.png
 tags:
   - macOS
 created: 2024-10-19T18:00:44+09:00
-updated: 2025-01-04T17:42:01+09:00
+updated: 2025-01-05T00:41:07+09:00
 permalink: nvim-head-brew
 publish: true
 ---

@@ -3,15 +3,13 @@ tags:
   - Linux
   - Arch
   - SecureBoot
-cover: profile_icon.png
 title: ArchLinuxでWin11と共存させるだけの無意味なSecureBootを構成する
 description: SecureBoot必須になったWin11との共存を手抜きでやる方法
 created: 2024-10-19T01:53
-updated: 2025-01-04T23:06:28+09:00
+updated: 2025-01-05T00:40:50+09:00
 permalink: gaba-secureboot
 publish: true
 ---
-
 # TL;DR
 
 SecureBootは有効だけど，検証はしないよ！（？？？）とかいう意味不明な構成にする（頻繁に破壊して𝑰𝑵𝑺𝑻𝑨𝑳𝑳 𝑩𝑨𝑻𝑻𝑳𝑬をするから真面目に構成するのめんどくなった）．

@@ -1,7 +1,6 @@
 ---
 title: ThinkPad + Arch + SecureBoot + LUKS + TPM + DualBoot
 description: ThinkPadでLUKS Full Disk EncryptionとTPMによる復号化を有効にしたDualBoot ArchLinux環境を構築した記録
-cover: profile_icon.png
 tags:
   - Arch
   - Linux
@@ -9,7 +8,7 @@ tags:
   - SecureBoot
   - TPM
 created: 2024-10-21T00:49:49+09:00
-updated: 2025-01-04T17:41:16+09:00
+updated: 2025-01-05T00:41:28+09:00
 permalink: cGqBgNqubsNyLiQ4
 publish: false
 ---

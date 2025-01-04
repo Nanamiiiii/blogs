@@ -1,12 +1,11 @@
 ---
 title: ArchWSL Installation Memo
 description: ArchWSLの導入メモ
-cover: profile_icon.png
 tags:
   - WSL
   - Windows
 created: 2024-10-19T18:02:42+09:00
-updated: 2025-01-04T17:42:26+09:00
+updated: 2025-01-05T00:40:53+09:00
 permalink: archwsl
 publish: true
 ---

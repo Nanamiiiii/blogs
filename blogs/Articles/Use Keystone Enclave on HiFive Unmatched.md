@@ -1,12 +1,11 @@
 ---
 title: Use Keystone Enclave on HiFive Unmatched
 description: How to run Keystone Enclave on HiFive Unmatched Development Board
-cover: profile_icon.png
 tags:
   - RISC-V
   - TEE
 created: 2024-10-19T18:18:43+09:00
-updated: 2025-01-04T17:41:09+09:00
+updated: 2025-01-05T00:41:31+09:00
 permalink: keystone-hifive-unmatched
 publish: true
 ---
