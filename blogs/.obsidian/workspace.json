@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Misc/Mendeley.md",
+                "file": "_index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Mendeley"
+              "title": "_index"
             }
           }
         ]
@@ -201,6 +201,13 @@
   },
   "active": "063ae10f45e35d69",
   "lastOpenFiles": [
+    "_config/Template/Update Publish Index.md",
+    "_config/Template/DailyNotes.md",
+    "_config/Template/Footprint.md",
+    "_config/Template/NewArticle.md",
+    "_config/Template/NewMisc.md",
+    "_index.md",
+    "Misc/Mendeley.md",
     "Misc/Trusted Execution Environment.md",
     "Misc/Zotero.md",
     "Misc/Hypervisor.md",
@@ -219,13 +226,6 @@
     "Articles/pacmanの設定.md",
     "Articles/Nixに入門する with nix-darwin.md",
     "Articles/neovimのHEADをビルドするだけのhomebrew formula.md",
-    "Articles/Multipass on Windows with VirtualBox.md",
-    "Articles/Kvantum + picomでVirtualBoxのゲストウィンドウが強制半透明になる問題.md",
-    "Articles/JellyfinでIntel QSVでのエンコードに失敗する.md",
-    "Articles/i3wmにおけるDPI設定のメモ.md",
-    "Articles/ArchWSL Installation Memo.md",
-    "Articles/ArchLinuxでWin11と共存させるだけの無意味なSecureBootを構成する.md",
-    "Articles/ArchLinux Install Battle.md",
-    "_index.md"
+    "Articles/Multipass on Windows with VirtualBox.md"
   ]
 }

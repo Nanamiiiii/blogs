@@ -19,7 +19,7 @@ tags:
 
 ---
 
-<%\*
+<%*
 const thisDay = this.app.workspace.getActiveFile().basename;
 const start = moment(thisDay).valueOf();
 const end = moment(start).endOf('day').valueOf();

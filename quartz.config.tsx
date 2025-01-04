@@ -95,8 +95,8 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Noto Sans JP",
-        body: "Noto Sans JP",
+        header: "M PLUS 1p",
+        body: "IBM Plex Sans JP",
         code: "IBM Plex Mono",
       },
       colors: {
