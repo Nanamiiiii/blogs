@@ -10,7 +10,9 @@ updated: 2025-01-04T17:41:03+09:00
 permalink: wsl-usb-storage
 publish: true
 ---
+
 # WSLでUSBメモリとかを使いたい
+
 いつ頃かは知りませんが，USBIPを利用してWSL2上のLinuxにUSBデバイスを共有できるようになってたみたいですね．
 
 Windows11のWSL標準Linuxカーネルには，既にUSBIPのモジュールが組み込まれています．なので単に接続するだけであれば，USBIPホストとクライアントの設定だけで利用できます．
@@ -21,32 +23,39 @@ Windows10の場合はUSBIPのモジュールもデフォルトで組み込まれ
 備忘録がてら手順を残しておきます．
 
 # 使用環境
+
 - Windows 11 Pro 22H2 (x64)
 - WSL (Version `1.0.0`, MS Store版)
   - Distribution: Arch Linux (ArchWSL `22.10.16.0`, WSL2)
   - Kernel: `5.15.74.2-microsoft-standard-WSL2`
 
 # 要件
+
 基本はMicrosoftの[ドキュメント](https://learn.microsoft.com/ja-jp/windows/wsl/connect-usb#prerequisites)の要件を満たしていればOKです．
 
 Linuxカーネルのビルドをするので，ある程度**リソースに余裕のある**WSLか普通のLinux環境があると望ましいです．ここでは既存のWSL上でそのままビルドします．
 
 # Linuxカーネルのビルド・変更
+
 ## 依存パッケージの導入
+
 カーネルビルドに必要なパッケージを調べて，先に導入しておきます．
 [Linuxの公式ドキュメント](https://www.kernel.org/doc/html/latest/process/changes.html)に最低限必要なプログラムのリストがありますが，`<ディストリビューション名> kernel build requirements`とかでググれば，パッケージマネージャのコマンドごと出てくると思います．
 
 Ubuntuの場合は以下のパッケージをインストールしておきます．
+
 ```bash
 sudo apt install build-essential flex bison dwarves libssl-dev libelf-dev cpio
 ```
 
 ArchLinuxは公式カーネルのPKGBUILDに従うと以下が最低限必要と思われます．
+
 ```shell
-pacman -S base-devel xmlto kmod inetutils bc libelf git cpio perl tar xz asp 
+pacman -S base-devel xmlto kmod inetutils bc libelf git cpio perl tar xz asp
 ```
 
 ## リポジトリのクローン
+
 WSL2カーネルのリポジトリをクローンします．
 
 https://github.com/microsoft/WSL2-Linux-Kernel
@@ -54,12 +63,15 @@ https://github.com/microsoft/WSL2-Linux-Kernel
 ```shell
 git clone https://github.com/microsoft/WSL2-Linux-Kernel.git --depth=1
 ```
+
 `--depth=1`でshallow cloneをしています．フルでクローンするとトータルで**3~4GB**くらいになるので，ストレージに余裕のない方は注意した方が良いです．
 
 ## Build Configuration
+
 いくつかやり方はありますが，ここではデフォルトのconfigをコピーしてきて，`menuconfig`で変更します．
 
 1. クローンしたディレクトリのルートで，以下を実行します．
+
    ```shell
    cp ./Microsoft/config-wsl ./.config
    make menuconfig
@@ -78,20 +90,23 @@ git clone https://github.com/microsoft/WSL2-Linux-Kernel.git --depth=1
 3. 変更したConfigを保存します．左右キーで下側のコマンドのカーソル（画像参照）を動かし，`Save`を選んで`Enter`を押します．
    ![](https://storage.googleapis.com/zenn-user-upload/59a0dcfd27d3-20221128.png)
    保存するファイル名を聞かれますが，特に変更の必要もないのでそのまま`Enter`でOKです．
-   
-  > [!tips] 
-  > `General Setup` → `Local version` から，Local version名の変更が可能です．`uname -a`とかで確認したときに出てくるやつですね．
-  > そのままでも問題無いですが，オリジナルと区別できるように適当に変えておくと良いでしょう．
-  > デフォルトは`-microsoft-standard-WSL2`です．
-  > ![](https://storage.googleapis.com/zenn-user-upload/72962bef04c7-20221128.png)
+
+> [!tips]
+> `General Setup` → `Local version` から，Local version名の変更が可能です．`uname -a`とかで確認したときに出てくるやつですね．
+> そのままでも問題無いですが，オリジナルと区別できるように適当に変えておくと良いでしょう．
+> デフォルトは`-microsoft-standard-WSL2`です．
+> ![](https://storage.googleapis.com/zenn-user-upload/72962bef04c7-20221128.png)
 
 4. 同様に`Exit`を選択して終了します．
 
 ## ビルド
+
 以下のコマンドでビルドします．
+
 ```shell
 make -j $(nproc)
 ```
+
 何回もカーネルのビルドを経験してると最早気になりませんが，貧弱なCPUだと結構時間がかかります．
 筆者のデスクトップで4分程度，ラップトップでは十数分かかりました．
 `-j`オプションなしだと単一ジョブで走るので，更に遅くなります．
@@ -104,25 +119,28 @@ make -j $(nproc)
     - **RAM:** DDR5-5200 64GB **16GB制限**
   - ラップトップ
     - **CPU:** Intel Core i7-8750H 6C/12T **6コア制限**
-    - **RAM:** DDR4-2666 16GB **8GB制限** 
+    - **RAM:** DDR4-2666 16GB **8GB制限**
 
 特に設定をいじっていなければ，CPUは搭載の全コア，メモリは全体の80%上限だったと思います．
 
 完成したカーネルは，`vmlinux`という名前でディレクトリのルートにいます．
+
 ```shell
-$ ls -lh vmlinux 
+$ ls -lh vmlinux
 -rwxr-xr-x 1 nanami nanami 808M Nov 28 01:39 vmlinux
 ```
 
 ちなみに，ビルド後は成果物で **+4GB** 程度ストレージを圧迫します．
 そもそもLinuxをフルでクローンすると，リポジトリ自体で3GB程度あります．
 Shallow cloneであればもう少し少ないはずです．
+
 ```shell
 $ du -sh
 7.1G    .
 ```
 
 ## カスタムカーネルに変更
+
 `.wslconfig`で作成したカーネルを指定し，WSLで使われるカーネルを差し替えます．
 この操作はWSLの全ディストリビューションに対して有効です．
 
@@ -130,25 +148,27 @@ $ du -sh
    置き場所はWindows側のファイルシステム上であればどこでも良いです．
    わかりやすい場所が良いので，Cドライブ直下などにディレクトリを作るのがベターでしょう．
    併せて適当にリネームもしています．
+
    ```shell
    mkdir -p /mnt/c/wsl
    cp ./vmlinux /mnt/c/wsl/515-microsoft-nanamiiiii-WSL
    ```
 
 2. (作成していない場合) `%USERPROFILE%`直下に`.wslconfig`ファイルを作成する
-`%USERPROFILE%`はユーザーディレクトリ，つまり`C:\Users\username`直下のことです．
-![](https://storage.googleapis.com/zenn-user-upload/a918f48ddc5d-20221128.png)
+   `%USERPROFILE%`はユーザーディレクトリ，つまり`C:\Users\username`直下のことです．
+   ![](https://storage.googleapis.com/zenn-user-upload/a918f48ddc5d-20221128.png)
 
 3. `.wslconfig`にカーネルの設定を書き込む
-`.wslconfig`は`ini`形式の設定ファイルで，全WSL環境で共通の設定になります．
-ここで`kernel`に先ほどコピーした`vmlinux`へのパスを指定します．
-`\`はエスケープをしないと正しく解釈されません
+   `.wslconfig`は`ini`形式の設定ファイルで，全WSL環境で共通の設定になります．
+   ここで`kernel`に先ほどコピーした`vmlinux`へのパスを指定します．
+   `\`はエスケープをしないと正しく解釈されません
    ```ini
    [wsl2]
    kernel=C:\\wsl\\515-microsoft-nanamiiiii-WSL
    ```
 
 ## WSLを再起動
+
 以下はWindows側のシェルから実行してください．
 
 ```powershell
@@ -167,6 +187,7 @@ https://github.com/dorssel/usbipd-win
 上のリポジトリのReleaseより，最新のmsiをダウンロード・インストールします．
 
 `winget`でもインストールできます．
+
 ```powershell
 winget install --interactive --exact dorssel.usbipd-win
 ```
@@ -174,18 +195,19 @@ winget install --interactive --exact dorssel.usbipd-win
 `PATH`を反映するため，ここで再起動 or 再ログインしておくと良いでしょう．
 
 # LinuxにUSBIPクライアントをインストール
+
 ここもディストリビューションによって異なるので，自身の環境にあったものを導入してください．
 Ubuntuの場合は[Microsoft公式Docs](https://learn.microsoft.com/ja-jp/windows/wsl/connect-usb#install-the-usbip-tools-and-hardware-database-in-linux)に記載があります．
 
 ArchLinuxの場合は以下でOKです．
+
 ```shell
 yay -S usbip usbutils
 ```
 
 # デバイスをUSBIPの共有対象にする
 
-> [!info]
-> `usbipd`は基本的にAdministratorで実行する必要があります
+> [!info] > `usbipd`は基本的にAdministratorで実行する必要があります
 
 > [!tips]
 > Windowsでも，LinuxのsudoのようにAdministratorへ昇格できる方法があります．
@@ -198,9 +220,11 @@ yay -S usbip usbutils
 まず，対象のUSBデバイスをUSBIPによる共有の対象にする必要があります．
 
 1. ホストのWindowsで接続可能なUSBデバイスをリストアップ
+
    ```powershell
    usbipd list
    ```
+
    ![スクリーンショット2024-03-02182844.png](https://myuu-dev.assets.newt.so/v1/78bf17c9-4c9f-482b-b764-e5631f05be5f/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%882024-03-02182844.png)
    ここでは`USB Mass Storage Device`や`USB 大容量記憶装置`としか表示されないので，接続したいデバイスが特定できない場合があります．そのときは，USBデバイスのプロパティでVendor IDとProduct IDを特定します．
    ![](https://storage.googleapis.com/zenn-user-upload/172aae4592b4-20221128.png)
@@ -212,7 +236,8 @@ yay -S usbip usbutils
    ```
    ![スクリーンショット2024-03-02190117.png](https://myuu-dev.assets.newt.so/v1/db8f1e3e-99a5-440c-b378-4d9d59b7f0c0/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%882024-03-02190117.png)
 
-#  デバイスをWSLにアタッチ
+# デバイスをWSLにアタッチ
+
 ```powershell
 usbipd attach --wsl [DISTRIBUTION] -b <BUSID>
 ```
@@ -228,20 +253,19 @@ WSLにアタッチしている間，そのデバイスにはWindows側からア�
 > WSL環境によっては以下のようなエラーが発生することがあります．
 >
 > ![スクリーンショット2024-03-02190345.png](https://myuu-dev.assets.newt.so/v1/78e69ab7-a3ec-4863-b8af-56f0305d3795/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%882024-03-02190345.png)
-> 
+>
 > Windows側の`C:\Program Files\usbpid-win\WSL`がWSLで正常にマウント出来ないことが原因です．
 > WSLにて以下のコマンドを正常に実行できれば問題無く使用可能となります．
-> 
+>
 > ```
 > sudo mount -t drvfs -o "ro,umask=222" "C:\Program Files\usbipd-win\WSL" "/var/run/usbipd-win"
 > ```
 
-
 > [!warning]
 > Windows側で常にデバイスが使用中扱いとなり，アタッチ出来ないことがあります．
-> 
+>
 > ![スクリーンショット2024-03-02194313.png](https://myuu-dev.assets.newt.so/v1/486f48e1-80ac-4714-a5bf-42f3bcbd0477/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%882024-03-02194313.png)
-> 
+>
 > この場合，バインドの際にforceバインドをすることでWindowsから完全に切り離され，アタッチ可能になります．
 >
 > ```
@@ -249,15 +273,17 @@ WSLにアタッチしている間，そのデバイスにはWindows側からア�
 > ```
 >
 > ![スクリーンショット2024-03-02194516.png](https://myuu-dev.assets.newt.so/v1/c49ce112-b314-4d9f-a909-916c3734a558/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%882024-03-02194516.png)
-> 
+>
 > forceバインド後はデバイスを再接続してください．
 
 # WSL側で確認
+
 `lsusb`や，ストレージデバイスなら`lsblk`で確認します．
 
 ![スクリーンショット2024-03-02200724.png](https://myuu-dev.assets.newt.so/v1/169eff3a-f121-469c-a662-a7d90ae384bd/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%882024-03-02200724.png)
 
 # デタッチ
+
 WSLからデタッチして，Windows側に戻します．同じく管理者権限のPowershellで以下を実行します．
 
 ```powershell
@@ -267,6 +293,7 @@ usbipd detach -b <BUSID>
 ![スクリーンショット2024-03-02213552.png](https://myuu-dev.assets.newt.so/v1/85ef57d8-cfca-4d25-973d-903c9430f588/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%882024-03-02213552.png)
 
 # おわりに
+
 大したことをやっているわけではないですが，慣れない人からすれば面倒な点がいくらかあるかと思ったので，少し丁寧に書きました．
 
 自分は組み込みデバイスのFWフラッシュやシリアルコンソール，JTAGデバッガなどをよく使うので，この機能は重宝しています．

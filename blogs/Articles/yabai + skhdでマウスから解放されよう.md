@@ -9,7 +9,9 @@ updated: 2025-01-04T17:40:51+09:00
 permalink: yabai
 publish: true
 ---
+
 # TL;DR
+
 マウス嫌いでもmacOSが使いたい！()
 
 macOS用タイル型ウィンドウマネージャの`yabai`とHotkey daemonの`skhd`で，`i3wm`/`swaywm`のような操作感にできる
@@ -19,7 +21,9 @@ https://github.com/koekeishiya/yabai
 https://github.com/koekeishiya/skhd
 
 # Initial Setup
+
 ## SIPの一部無効化
+
 yabaiの機能のうち，
 
 - space（仮想デスクトップ）の切り替え
@@ -34,6 +38,7 @@ yabaiの機能のうち，
 保護レベルが低下することになるが，個人的にはこれらの機能なしならばyabaiは使わない方が良い印象．
 
 ### 無効化手順
+
 1. マシンをリカバリーモードで起動する
    - M1, M2, M3 Mac: 電源キー長押し
    - Intel Mac: `Command` + `R` を押しながら起動
@@ -47,7 +52,7 @@ yabaiの機能のうち，
    # Intel Mac
    csrutil disable --with kext --with dtrace --with nvram --with basesystem
    ```
-4. 通常起動し，bootargを書き換え（M* Macのみ）
+4. 通常起動し，bootargを書き換え（M\* Macのみ）
    ```
    sudo nvram boot-args=-arm64e_preview_abi
    ```
@@ -56,7 +61,9 @@ yabaiの機能のうち，
 ![SIP Status](https://storage.googleapis.com/zenn-user-upload/7c641bdec64b-20230910.png)
 
 ## Install
+
 アクセシビリティ許可のポップアップに従って許可設定も行う．
+
 ```
 # yabai
 brew install koekeishiya/formulae/yabai
@@ -67,8 +74,11 @@ skhd --start-service
 ```
 
 # Configuration
+
 ## yabai
+
 設定ファイルは以下に配置する．
+
 - `$XDG_CONFIG_HOME/yabai/yabairc`
 - `$HOME/.config/yabai/yabairc`
 - `$HOME/.yabairc`
@@ -76,7 +86,9 @@ skhd --start-service
 設定ファイルに書くのは `yabai -m config` で行う設定とウィンドウごとのルール（デフォルトfloatingにする等）
 
 ## skhd
+
 設定ファイルは以下に配置する．
+
 - `$XDG_CONFIG_HOME/skhd/skhdrc`
 - `$HOME/.config/skhd/skhdrc`
 - `$HOME/.skhdrc`
@@ -118,20 +130,26 @@ resize < alt - x : yabai -m space --mirror x-axis
 ```
 
 ## My Configuration
+
 - [yabai](https://github.com/Nanamiiiii/dotfiles/tree/main/yabai)
 - [skhd](https://github.com/Nanamiiiii/dotfiles/tree/main/skhd)
 
 # Scripting Addition
+
 TBD
 
 # Status Bar
+
 TBD
 
-# M* Macのノッチ対応
+# M\* Macのノッチ対応
+
 TBD
 
 # Widnowsルール
+
 TBD
 
 # JankyBordersの併用
+
 TBD

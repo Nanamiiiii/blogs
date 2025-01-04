@@ -9,13 +9,17 @@ updated: 2025-01-04T17:42:01+09:00
 permalink: nvim-head-brew
 publish: true
 ---
+
 # Why
+
 公式のformulaでHEADをビルドするとtreesitter parserが内包されない（stableだといくつかがデフォルトで含まれる）．
 自分のneovimのconfigはデフォでLuaのparserがないと死ぬみたいなので，HEADのビルドに含めたかった．
 手動の時みたいに`cmake`じゃなくて`make`を叩くやり方ならその辺をよしなにやってくれてるので，そのformulaを書いた．
 
 # formula
+
 ✝The 適当✝なのでdependencyとかも多分ガバガバ．
+
 ```ruby
 class Neovim < Formula
   desc "Ambitious Vim-fork focused on extensibility and agility"
@@ -42,7 +46,9 @@ end
 ```
 
 # 使いたい人へ
+
 まあいないと思うけど
+
 ```
 brew tap Nanamiiiii/formula
 brew install Nanamiiiii/formula/neovim --HEAD

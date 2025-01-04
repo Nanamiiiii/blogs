@@ -8,6 +8,7 @@ created: 2024-10-21T13:22:32+09:00
 updated: 2025-01-04T19:23:55+09:00
 publish: true
 ---
+
 https://www.mendeley.com
 
 Scopusでお馴染みElsevier社の提供する文献管理ツール

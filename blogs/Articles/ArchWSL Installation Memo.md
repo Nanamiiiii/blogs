@@ -10,11 +10,13 @@ updated: 2025-01-04T17:42:26+09:00
 permalink: archwsl
 publish: true
 ---
+
 # Download
 
 https://github.com/yuk7/ArchWSL/tree/master
 
 # 手順
+
 1. ダウンロードして`Arch.exe`と`rootfs.tar.gz`を適当な場所へ解凍
 2. `Arch.exe`を起動
 3. Keyringの更新
@@ -30,15 +32,17 @@ https://github.com/yuk7/ArchWSL/tree/master
    reflector -c JP -p https -p http --sort rate --save /etc/pacman.d/mirrorlist
    ```
 6. 通常ユーザー作成・sudo
+
    ```
    useradd -m hoge
    passwd hoge
    usermod -aG wheel hoge
-   
+
    EDITOR=vim visudo
    # Comment Out
    %wheel ALL=(ALL:ALL) ALL
    ```
+
 7. `/etc/wsl.conf`に以下を追加．デフォルトユーザーとWinのPATH除外．
    ```
    [user]

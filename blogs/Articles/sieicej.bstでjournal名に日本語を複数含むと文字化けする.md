@@ -9,7 +9,9 @@ updated: 2025-01-04T17:41:32+09:00
 permalink: sieicej-bug-00
 publish: true
 ---
+
 # 補足
+
 既にissueとしてあがっており，upstreamには修正が入っている模様．
 
 https://github.com/texjporg/tex-jp-build/issues/157
@@ -17,15 +19,19 @@ https://github.com/texjporg/tex-jp-build/issues/157
 TeXLive2023リリース後のrevisionでの修正なので，OverleafでTeXLive2023を選択している場合にバグる．TexLive2022を選択すれば問題なく動作した．
 
 # 環境
+
 Overleafを使用
+
 - TeXLive2023
 - e-upTeX: Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.euc) (TeX Live 2023)
 - upbibtex: Version 0.99d-j0.36-u1.29 (utf8.euc) (TeX Live 2023)
 - ソースは全てUTF-8
 
 # 状況
+
 bibの`article`エントリで，`journal`に複数の日本語を含めると2文字目以降が文字化けする．
 以下のエントリを追加した際に発覚した．
+
 ```
 @article{weko_204499_1,
    author	 = "須崎 有康 and 佐々木 貴之",
@@ -40,11 +46,12 @@ bibの`article`エントリで，`journal`に複数の日本語を含めると2�
 ```
 
 以下のエラー出力が出る．`upbibtex`の吐いた`bbl`に文字化けがあり，`uplatex`から怒られが発生する．
+
 ```
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
- ...                                              
-                                                  
+ ...
+
 l.26 情塀諭^^a4
 ```
 
@@ -52,9 +59,11 @@ l.26 情塀諭^^a4
 色々試したが，日本語1文字だけなら通るが，2文字以上だと絶対に文字化けが起きる．
 
 # 原因
+
 IEICEの配布テンプレに含まれる`sieicej.bst`に含まれる，文字列のフォーマットを行う関数が原因．
 
 `article`エントリは，以下の関数が処理する．
+
 ```
 FUNCTION {article}
 {
@@ -80,8 +89,10 @@ FUNCTION {article}
   fin.entry
 }
 ```
+
 `journal`が処理されるのは`format.journal "journal" output.check`のところで，`format.journal`が整形を行う関数．
 これの実体は以下．
+
 ```
 FUNCTION {format.journal}
 {
@@ -95,7 +106,9 @@ FUNCTION {format.journal}
   if$
 }
 ```
+
 このとおり，実際に整形を行っているのは`format.string`らしい．これの実体を見てみる．
+
 ```
 FUNCTION {format.string}
 {
@@ -133,6 +146,7 @@ FUNCTION {format.string}
   while$
 }
 ```
+
 少しわかりにくいが，`substring$`というビルトイン関数で1文字ずつ取り出し，連結していく処理をしている．名前の通り`substring$`は文字列の一部を取り出す関数．
 日本語が含まれるものは`is.kanji.str`で判別され2文字ずつ取り出すようになっている．2バイト対応のためだろうか．
 

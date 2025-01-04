@@ -10,7 +10,9 @@ updated: 2025-01-04T17:40:18+09:00
 permalink: archpkg-repo
 publish: true
 ---
+
 # 経緯
+
 [これ](https://myuu.dev/blogs/nvim-head-brew)と同様．
 AURにHEADをビルドできるPKGBUILDがあるが，これがまたtreesitterのparserをデフォで抱き合わせていない．
 （抱き合わせがなくても動くようなconfigにしろよって話でもある）
@@ -18,7 +20,9 @@ AURにHEADをビルドできるPKGBUILDがあるが，これがまたtreesitter�
 なんで毎日HEADをビルドしてパッケージ化し，ホストするリポジトリを作った．
 
 # 作り方
+
 ## PKGBUILDを作る
+
 ArchWikiの[PKGBUILD](https://wiki.archlinux.jp/index.php/PKGBUILD)を見るのが早い．実体としてはただのbash構文のスクリプト．
 パッケージ名やら依存関係やらをゴリゴリと書いていくだけなのでそこまで難しくない．
 今回はAURの`neovim-git`をベースにビルド方法を一部変えただけなのでもっと楽．
@@ -103,18 +107,23 @@ package() {
 ```
 
 ## パッケージアーカイブを作る
+
 PKGBUILDからパッケージアーカイブ `*.pkg.tar.zst` を作る．
 PKGBUILDと同一のディレクトリで以下を実行すればよい．
+
 ```shell
 makepkg -s
 ```
+
 完了するとカレントディレクトリにパッケージが生成される．設定によってはデバッグパッケージも生成される．
+
 ```
 [nanami@arch-pkgbuilder neovim-head]$ ls -la neovim-*
 -rw-r--r-- 1 nanami nanami 7562254 Feb 26 20:14 neovim-head-0.10.0.r2452.gad5a155b1f-1-x86_64.pkg.tar.zst
 ```
 
 ## リポジトリを作成
+
 pacmanのリポジトリはデータベースとパッケージ本体で構成される．
 データベースの生成は`pacman`に含まれる`repo-add`で可能．
 ArchWikiの説明は[これ](https://wiki.archlinux.jp/index.php/Pacman/%E3%83%92%E3%83%B3%E3%83%88%E3%81%A8%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF#.E3.82.AB.E3.82.B9.E3.82.BF.E3.83.A0.E3.83.AD.E3.83.BC.E3.82.AB.E3.83.AB.E3.83.AA.E3.83.9D.E3.82.B8.E3.83.88.E3.83.AA)．
@@ -123,6 +132,7 @@ ArchWikiの説明は[これ](https://wiki.archlinux.jp/index.php/Pacman/%E3%83%9
 ただ他のディストリビューションやアーキテクチャで併用することを考慮して，適当に決めたルート（ここでは`reporoot`にしておく）から`archlinux/x86_64`の位置に配置することにした．
 
 あとは配置するディレクトリにパッケージをコピーして，`repo-add`を実行すればよい．
+
 ```bash
 # Copy
 cp neovim-head-0.10.0.r2452.gad5a155b1f-1-x86_64.pkg.tar.zst reporoot/archlinux/x86_64
@@ -130,10 +140,12 @@ cp neovim-head-0.10.0.r2452.gad5a155b1f-1-x86_64.pkg.tar.zst reporoot/archlinux/
 cd reporoot/archlinux/x86_64
 repo-add reponame.db.tar.xz neovim-head-0.10.0.r2452.gad5a155b1f-1-x86_64.pkg.tar.zst
 ```
+
 データベースが存在すれば既存のものが更新され，存在しなければ新たにデータベースが作成される．
 `reponame`で指定した名前がリポジトリの名称になる．これを後で`pacman.conf`に記載することになる．
 
 ## 適当にホストする
+
 ローカルで使うだけなら特段何もしなくてもよし．
 HTTP経由で引っ張りたいのであれば，`reporoot`に対してnginxとかapacheでHTTPアクセス可能にすれば良いだろう．
 
@@ -141,7 +153,9 @@ HTTP経由で引っ張りたいのであれば，`reporoot`に対してnginxと�
 特に隠す物もないのでPublicにしている．[https://pkg.myuu.dev](https://pkg.myuu.dev)
 
 ## pacmanの設定に加える
+
 `pacman.conf`を編集し，以下のエントリを追加する．
+
 ```ini
 [reponame]
 SigLevel = Optional # 署名検証を任意にする．パッケージ署名に関しては後ほど書く．
@@ -149,6 +163,7 @@ SigLevel = Optional # 署名検証を任意にする．パッケージ署名に�
 Server = http://hogehoge.com/archlinux/$arch # HTTPアクセス
 Server = files:///reporoot/archlinux/$arch # ローカル
 ```
+
 `$arch`にはマシンのアーキテクチャが勝手に入る．
 
 正しく設定出来ていれば，`pacman -Sy`で自作リポジトリのデータベースが落ちてくるはず．
@@ -160,52 +175,68 @@ Server = files:///reporoot/archlinux/$arch # ローカル
  extra                                                                               8.3 MiB  39.0 MiB/s 00:00 [##################################################################] 100%
  myuurepo                                                                          728.0   B  2.63 KiB/s 00:00 [##################################################################] 100%
 ```
+
 こんな感じで`myuurepo`ってのが追加されている．
 
 # 補足
+
 ## パッケージ署名
+
 正当なパッケージであることを保証するために，パッケージ署名をを付与するとよい．
 今回は自動でビルドさせたりをしたかったので面倒だから付けていない（そもそもパッケージ作成を自動化ワークフローでやらせるのが推奨されてない．まあそれはそう．）
 
 ### GPG Keyを作る
+
 ```
 gpg --gen-key
 ```
+
 ここでは書かないがバックアップと失効証明書はちゃんとエクスポートした方が良い．
 作成すると鍵のfingerprintが出力されるので覚えておく．以下のコマンドで後から確認も出来る．
+
 ```
 gpg --list-keys
 ```
 
 ### 自身の公開鍵を鍵サーバーへアップロード
+
 他者が検証するときに使うため．
+
 ```
 gpg --send-key <key fingerprint>
 ```
 
 ### makepkgの署名設定
+
 `/etc/makepkg.conf` or `~/.config/pacman/makepkg.conf`の以下をコメントアウト・編集
+
 ```ini
 ﻿#-- Packager: name/email of the person or organization building packages
 PACKAGER="Akihiro Saiki <nanami [at] myuu.dev>" # [at]はリプレイスしている
 #-- Specify a key to use for package signing
 GPGKEY="XXXXXXXXXXXXXXXXXXXXX"
 ```
+
 `PACKAGER`はgpg鍵の生成時に入力した実名とメールアドレス，`GPGKEY`は鍵のfingerprint．
 
 ### 署名付きでパッケージ生成
+
 ```
 makepkg -s --sign
 ```
+
 `makepkg.conf`や`PKGBUILD`側でも署名するよう指示できる．
 するとパッケージと`*.pkg.tar.zst.sig`という署名ファイルも生成される．
 これをパッケージと同じディレクトリに配置して，同じく`repo-add`をすると勝手に認識してくれる．
 
 # もし使いたければ…
+
 自分で使う物だけなので大したもの置いてないです．
+
 ```
 pacman-key --recv-key 8F2CA5A0068E9627
 ```
+
 ```ini
 [myuurepo]
 SigLevel = Optional

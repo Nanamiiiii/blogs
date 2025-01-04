@@ -10,7 +10,9 @@ updated: 2025-01-04T17:41:09+09:00
 permalink: keystone-hifive-unmatched
 publish: true
 ---
+
 # Build SD card image
+
 You can build all-in-one SD card image by single make command from [this commit](https://github.com/keystone-enclave/keystone/commit/a06b05485ed59489ba0a8158a7de8c85988a1009).
 
 ```shell
@@ -20,6 +22,7 @@ make KEYSTONE_PLATFORM=unmatched -j $(nproc)
 SD card image is to be located in `build-unmatched64/buildroot.build/images/sdcard.img`
 
 ## Included components
+
 Some patches included in [freedom-u-sdk](https://github.com/sifive/freedom-u-sdk) are also applied.
 
 - U-Boot SPL
@@ -32,19 +35,24 @@ Some patches included in [freedom-u-sdk](https://github.com/sifive/freedom-u-sdk
   - Keystone Driver
 
 ## Known Issues
+
 - building linux perf sometimes fails
   - re-running make , build will succeed
 
 # Deal with buildroot build system
-In Keystone's build system, buildroot target can be passed directly by `BUILDROOT_TARGET`. For example, 
+
+In Keystone's build system, buildroot target can be passed directly by `BUILDROOT_TARGET`. For example,
+
 ```shell
 make BUILDROOT_TARGET=linux-build
 ```
 
-Target name format is `<package>-<command>`. `<package>` is package name such as linux, u-boot, opensbi and keystone-sm. `<command>` is subcommand for package such as build, configure, patch, clean and rebuild. 
+Target name format is `<package>-<command>`. `<package>` is package name such as linux, u-boot, opensbi and keystone-sm. `<command>` is subcommand for package such as build, configure, patch, clean and rebuild.
 
 # Build single component
+
 ## Keystone SM
+
 You can build following command:
 
 ```shell
@@ -60,6 +68,7 @@ Security Monitor set no permission to range `0x80000000 - 0x801fffff`. But U-Boo
 Changing U-Boot's load address to upper region solve this issue. U-Boot built in keystone build system is loaded to `0x80210000`.
 
 U-Boot load address can be changed by adding/modifying config as following:
+
 ```
 CONFIG_TEXT_BASE=0x80210000
 CONFIG_SYS_LOAD_ADDR=0x80210000

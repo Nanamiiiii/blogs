@@ -9,12 +9,12 @@ import * as Plugin from "./quartz/plugins"
  * See https://quartz.jzhao.xyz/configuration for more information.
  */
 const ogpImageStructure: SocialImageOptions["imageStructure"] = (
-    cfg: GlobalConfiguration,
-    { colorScheme }: UserOpts,
-    title: string,
-    description: string,
-    fonts: SatoriOptions["fonts"],
-    _fileData: QuartzPluginData,
+  cfg: GlobalConfiguration,
+  { colorScheme }: UserOpts,
+  title: string,
+  description: string,
+  fonts: SatoriOptions["fonts"],
+  _fileData: QuartzPluginData,
 ) => {
   // How many characters are allowed before switching to smaller font
   const fontBreakPoint = 22
@@ -74,7 +74,6 @@ const ogpImageStructure: SocialImageOptions["imageStructure"] = (
   )
 }
 
-
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "Myuu's Trashcan",
@@ -89,8 +88,8 @@ const config: QuartzConfig = {
     ignorePatterns: ["private", "templates", ".obsidian", "_config"],
     defaultDateType: "created",
     generateSocialImages: {
-        colorScheme: "darkMode",
-        imageStructure: ogpImageStructure,
+      colorScheme: "darkMode",
+      imageStructure: ogpImageStructure,
     },
     theme: {
       fontOrigin: "googleFonts",

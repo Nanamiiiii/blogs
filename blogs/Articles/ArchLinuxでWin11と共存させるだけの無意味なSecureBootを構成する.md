@@ -11,24 +11,30 @@ updated: 2025-01-04T23:06:28+09:00
 permalink: gaba-secureboot
 publish: true
 ---
+
 # TL;DR
+
 SecureBootは有効だけど，検証はしないよ！（？？？）とかいう意味不明な構成にする（頻繁に破壊して𝑰𝑵𝑺𝑻𝑨𝑳𝑳 𝑩𝑨𝑻𝑻𝑳𝑬をするから真面目に構成するのめんどくなった）．
 あくまでSecureBoot必須のWin11と共存する目的であって，**セキュリティ的には破綻**しているので非推奨．
 真面目な人はMOKの鍵を生成して署名するかハッシュをenrollするかして，ちゃんと検証するようにしてね．
 
 # そもSeucure Bootって？いるの？
+
 ggrks
 
 # 手順
+
 ## 前提
+
 - ArchLinuxの初期インストールが終わって，GRUB導入済み・起動済み．
 - WinとArchは別ストレージにいて，ESPも個別に持ってる想定（壊したくないので）．
 - ESPは`/boot`想定
 - AURの使えるpacmanラッパーを入れておく（ここでは`yay`で進める）
 
 ## GRUBのバイナリにsbatセクションを付加
+
 1. バイナリに内包するmoduleをexportしておく
-    [ここ](https://git.launchpad.net/~ubuntu-core-dev/grub/+git/ubuntu/tree/debian/build-efi-images)を参考に必要なmoduleを選ぶ．片っ端から入れとくと失敗はしない．以下は全部含めた例．
+   [ここ](https://git.launchpad.net/~ubuntu-core-dev/grub/+git/ubuntu/tree/debian/build-efi-images)を参考に必要なmoduleを選ぶ．片っ端から入れとくと失敗はしない．以下は全部含めた例．
    ```bash
    export GRUB_MODULES="all_video boot btrfs cat chain configfile echo efifwsetup efinet ext2 fat font gettext gfxmenu gfxterm gfxterm_background gzio halt help hfsplus iso9660 jpeg keystatus loadenv loopback linux ls lsefi lsefimmap lsefisystab lssal memdisk minicmd normal ntfs part_apple part_msdos part_gpt password_pbkdf2 peimage png probe reboot regexp search search_fs_uuid search_fs_file search_label serial sleep smbios squash4 test tpm true video xfs zfs zfscrypt zfsinfo cryptodisk gcry_arcfour gcry_blowfish gcry_camellia gcry_cast5 gcry_crc gcry_des gcry_dsa gcry_idea gcry_md4 gcry_md5 gcry_rfc2268 gcry_rijndael gcry_rmd160 gcry_rsa gcry_seed gcry_serpent gcry_sha1 gcry_sha256 gcry_sha512 gcry_tiger gcry_twofish gcry_whirlpool luks lvm mdraid09 mdraid1x raid5rec raid6rec"
    ```
@@ -42,6 +48,7 @@ ggrks
    ```
 
 ## Secure Boot有効化と検証無効化
+
 1. `shim-signed`と`mokutil`を入れる
    ```bash
    yay -S shim-signed mokutil

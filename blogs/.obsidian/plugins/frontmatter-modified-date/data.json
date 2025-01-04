@@ -5,9 +5,7 @@
   "storeHistoryLog": false,
   "historyNewestFirst": false,
   "historyMaxItems": 0,
-  "excludedFolders": [
-    "_config"
-  ],
+  "excludedFolders": ["_config"],
   "useKeyupEvents": false,
   "onlyUpdateExisting": false,
   "timeout": 10,
