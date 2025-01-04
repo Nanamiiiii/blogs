@@ -58,6 +58,8 @@ try {
 	await app.vault.modify(index_tfile, "---\n");
 	await app.vault.append(index_tfile, "title: Home\n");
 	await app.vault.append(index_tfile, "tags: []\n");
+	await app.vault.append(index_tfile, "publish: true\n");
+	await app.vault.append(index_tfile, "description: 日々の戯れ言\n");
 	await app.vault.append(index_tfile, "---\n");
 	//await app.vault.append(index_tfile, "# Tags\n");
 	//await app.vault.append(index_tfile, tagsFileContent);
