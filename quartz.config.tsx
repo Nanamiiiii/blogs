@@ -18,7 +18,9 @@ const ogpImageStructure: SocialImageOptions["imageStructure"] = (
 ) => {
   // How many characters are allowed before switching to smaller font
   const fontBreakPoint = 22
-  const useSmallerFont = title.length > fontBreakPoint
+  const descFontBreakPoint = 32
+  const titleSize = title.length > fontBreakPoint ? 50 : 72
+  const descSize = description.length > descFontBreakPoint ? 32 : 44;
 
   // Setup to access image
   const iconPath = `https://${cfg.baseUrl}/static/icon.png`
@@ -49,27 +51,60 @@ const ogpImageStructure: SocialImageOptions["imageStructure"] = (
           gap: "2.5rem",
         }}
       >
-        <img src={iconPath} width={135} height={135} />
         <p
           style={{
             color: cfg.theme.colors[colorScheme].dark,
-            fontSize: useSmallerFont ? 60 : 72,
+            fontSize: titleSize,
             fontFamily: fonts[0].name,
           }}
         >
           {title}
         </p>
       </div>
-      <p
+      <div
         style={{
-          color: cfg.theme.colors[colorScheme].dark,
-          fontSize: 44,
-          lineClamp: 3,
-          fontFamily: fonts[1].name,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          width: "100%",
+          flexDirection: "row",
+          gap: "2.5rem",
         }}
       >
-        {description}
-      </p>
+        <p
+          style={{
+            color: cfg.theme.colors[colorScheme].dark,
+            fontSize: descSize,
+            lineClamp: 3,
+            fontFamily: fonts[1].name,
+          }}
+        >
+          {description}
+        </p>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          width: "100%",
+          flexDirection: "row",
+          gap: "2.5rem",
+        }}
+      >
+        <img src={iconPath} width={50} height={50} />
+        <p
+          style={{
+            color: cfg.theme.colors[colorScheme].dark,
+            fontSize: 30,
+            lineClamp: 3,
+            fontFamily: fonts[1].name,
+            fontStyle: "italic",
+          }}
+        >
+          Myuu's Trashcan
+        </p>
+      </div>
     </div>
   )
 }
@@ -140,6 +175,7 @@ const config: QuartzConfig = {
       }),
       Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: true }),
       Plugin.GitHubFlavoredMarkdown(),
+      Plugin.HardLineBreaks(),
       Plugin.TableOfContents(),
       Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
