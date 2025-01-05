@@ -10,7 +10,7 @@ description: 1ヶ月ほどでNixに入門したお話 nix-darwinの部分より
 permalink: nix-noob-darwin
 publish: true
 title: Nixへ入門する nix-darwin編
-updated: 2025-01-05T21:01:12+09:00
+updated: 2025-01-05T21:13:28+09:00
 ---
 1ヶ月ほど前に数年使用してきた[dotfiles](https://github.com/Nanamiiiii/dotfiles)のNix化をはじめた．
 動機としては，しばらく前からVim-jp内で流行っていて目をつけていたというのもあるが… 自分のdotfilesがゴチャゴチャしてきて困っていたというのが大きい．

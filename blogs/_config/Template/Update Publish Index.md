@@ -11,8 +11,8 @@ const dv = app.plugins.plugins["dataview"].api;
 // Collect file lists
 const queries = [
 	'TABLE WITHOUT ID file.link AS Note FROM "Footprints" WHERE publish SORT file.ctime desc LIMIT 10',
-	'TABLE WITHOUT ID file.link AS Note, dateformat(file.mtime, "yyyy/MM/dd HH:mm:ss") AS Modified WHERE publish AND file.name != "_index" SORT file.mtime desc LIMIT 10',
-	'TABLE WITHOUT ID file.link AS Note, dateformat(file.ctime, "yyyy/MM/dd HH:mm:ss") AS Added WHERE publish AND file.name != "_index" SORT file.ctime desc LIMIT 10',
+	'TABLE WITHOUT ID file.link AS Note, dateformat(file.mtime, "yyyy/MM/dd HH:mm:ss") AS Modified WHERE publish AND !invisible AND file.name != "_index" SORT file.mtime desc LIMIT 10',
+	'TABLE WITHOUT ID file.link AS Note, dateformat(file.ctime, "yyyy/MM/dd HH:mm:ss") AS Added WHERE publish AND !invisible AND file.name != "_index" SORT file.ctime desc LIMIT 10',
 ];
 const footprints_query = await dv.queryMarkdown(queries[0]);
 const modified_query = await dv.queryMarkdown(queries[1]);
