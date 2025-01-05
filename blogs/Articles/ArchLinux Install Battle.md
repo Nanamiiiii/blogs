@@ -5,11 +5,10 @@ tags:
 title: ArchLinux Install Battle
 description: ArchLinux Install Battle
 created: 2024-10-19T01:53
-updated: 2025-01-05T00:40:46+09:00
+updated: 2025-01-05T17:05:32+09:00
 permalink: archinstall
 publish: true
 ---
-
 Install Battleのメモ
 DEはi3wm & KDE
 KernelはZen
