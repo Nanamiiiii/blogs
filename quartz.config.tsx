@@ -20,7 +20,7 @@ const ogpImageStructure: SocialImageOptions["imageStructure"] = (
   const fontBreakPoint = 22
   const descFontBreakPoint = 32
   const titleSize = title.length > fontBreakPoint ? 50 : 72
-  const descSize = description.length > descFontBreakPoint ? 32 : 44;
+  const descSize = description.length > descFontBreakPoint ? 32 : 44
 
   // Setup to access image
   const iconPath = `https://${cfg.baseUrl}/static/icon.png`

@@ -29,6 +29,23 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Darkmode(),
     Component.DesktopOnly(
       Component.Explorer({
+        sortFn: (a, b) => {
+          if ((!a.file && !b.file) || (a.file && b.file)) {
+            if (a.file?.dates?.created && b.file?.dates?.created) {
+              return a.file.dates.created < b.file.dates.created ? 1 : -1
+            }
+            if (a.file?.dates?.created && !b.file?.dates?.created) {
+              return 1
+            } else {
+              return -1
+            }
+          }
+          if (a.file && !b.file) {
+            return 1
+          } else {
+            return -1
+          }
+        },
         filterFn: (node) => {
           if (node.file) {
             return node.name !== "tags" && node.file?.frontmatter?.invisible !== true
