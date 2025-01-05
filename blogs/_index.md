@@ -3,11 +3,11 @@ title: Home
 tags: []
 publish: true
 description: 日々の戯れ言
+updated: 2025-01-05T11:45:40+09:00
+created: 2025-01-05T02:29:52+09:00
 ---
-> "Garbage" "掃きだめ" "戯れ言"
-
-> ここにあるものは全て個人の意見・感想です
-
+> "Garbage" "掃きだめ" "戯れ言"  
+> ここにあるものは全て個人の意見・感想です  
 > ―― Myuu
 
 # Footprints
