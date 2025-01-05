@@ -1,0 +1,28 @@
+{
+  "hideStrictPathFilters": true,
+  "pinFilters": {
+    "active": true,
+    "tags": [
+      {
+        "name": "",
+        "active": true,
+        "pattern": "",
+        "patternType": "STRICT"
+      }
+    ],
+    "paths": []
+  },
+  "hideFilters": {
+    "active": false,
+    "tags": [],
+    "paths": [
+      {
+        "name": "underscore",
+        "active": true,
+        "type": "DIRECTORIES",
+        "pattern": "^_.*$",
+        "patternType": "REGEX"
+      }
+    ]
+  }
+}

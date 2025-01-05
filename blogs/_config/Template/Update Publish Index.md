@@ -61,6 +61,9 @@ try {
 	await app.vault.append(index_tfile, "publish: true\n");
 	await app.vault.append(index_tfile, "description: 日々の戯れ言\n");
 	await app.vault.append(index_tfile, "---\n");
+	await app.vault.append(index_tfile, "> \"Garbage\" \"掃きだめ\" \"戯れ言\"\n");
+	await app.vault.append(index_tfile, "> ここにあるものは全て個人の意見・感想です\n");
+	await app.vault.append(index_tfile, "> ―― Myuu\n\n");
 	//await app.vault.append(index_tfile, "# Tags\n");
 	//await app.vault.append(index_tfile, tagsFileContent);
 	//await app.vault.append(index_tfile, "\n\n");
