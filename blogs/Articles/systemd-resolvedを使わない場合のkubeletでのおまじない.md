@@ -5,7 +5,7 @@ tags:
 title: systemd-resolvedを使わない場合のkubeletでのおまじない
 description: JellyfinのHardware Transcodeにて，QSVによるエンコードを有効にするとTranscodeを必要とする条件で再生に失敗する際の対処
 created: 2024-10-19T01:39
-updated: 2025-01-05T00:41:26+09:00
+updated: 2025-01-06T18:48:24+09:00
 permalink: kubelet-resolv
 publish: true
 ---

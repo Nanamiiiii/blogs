@@ -1,10 +1,10 @@
 ---
-title: yabai + skhdでマウスから解放されよう
+title: yabaiとskhdでマウスから解放されよう
 description: macOSでのyabai + skhdを使ったキーボードonly生活のはなし
 tags:
   - macOS
 created: 2024-10-19T18:05:31+09:00
-updated: 2025-01-05T00:41:39+09:00
+updated: 2025-01-06T18:47:56+09:00
 permalink: yabai
 publish: true
 ---

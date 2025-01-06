@@ -25,7 +25,7 @@ description: 日々の戯れ言
 | [[Footprints/2024-11.md\|2024-11]]                                       | 2025/01/05 11:53:18 |
 | [[_config/Template/Footprint New.md\|Footprint New]]                     | 2025/01/05 11:52:06 |
 | [[Articles/自分用のArchLinuxパッケージリポジトリを作った.md\|自分用のArchLinuxパッケージリポジトリを作った]] | 2025/01/05 00:41:42 |
-| [[Articles/yabai + skhdでマウスから解放されよう.md\|yabai + skhdでマウスから解放されよう]]       | 2025/01/05 00:41:39 |
+| [[yabaiとskhdでマウスから解放されよう\|yabai + skhdでマウスから解放されよう]]       | 2025/01/05 00:41:39 |
 | [[Articles/WSLでのUSBデバイス利用.md\|WSLでのUSBデバイス利用]]                           | 2025/01/05 00:41:36 |
 | [[Articles/WSLからUSBストレージデバイスを使う.md\|WSLからUSBストレージデバイスを使う]]               | 2025/01/05 00:41:34 |
 
@@ -36,7 +36,7 @@ description: 日々の戯れ言
 | [[Footprints/2024-11.md\|2024-11]]                                                                 | 2025/01/05 00:41:49 |
 | [[Footprints/2024-10.md\|2024-10]]                                                                 | 2025/01/05 00:41:45 |
 | [[Articles/自分用のArchLinuxパッケージリポジトリを作った.md\|自分用のArchLinuxパッケージリポジトリを作った]]                           | 2025/01/05 00:41:42 |
-| [[Articles/yabai + skhdでマウスから解放されよう.md\|yabai + skhdでマウスから解放されよう]]                                 | 2025/01/05 00:41:39 |
+| [[yabaiとskhdでマウスから解放されよう\|yabai + skhdでマウスから解放されよう]]                                 | 2025/01/05 00:41:39 |
 | [[Articles/WSLでのUSBデバイス利用.md\|WSLでのUSBデバイス利用]]                                                     | 2025/01/05 00:41:36 |
 | [[Articles/WSLからUSBストレージデバイスを使う.md\|WSLからUSBストレージデバイスを使う]]                                         | 2025/01/05 00:41:34 |
 | [[Articles/Use Keystone Enclave on HiFive Unmatched.md\|Use Keystone Enclave on HiFive Unmatched]] | 2025/01/05 00:41:31 |
